@@ -1,0 +1,54 @@
+﻿@page "/f/{id}"
+@using QrRedirect.Services
+@rendermode InteractiveServer
+@inject RedirectManagerService redirectManagerService
+
+<PageTitle>Redirect the other page</PageTitle>
+
+@code {
+    [Parameter] public string id { get; set; }
+    protected string link { get; set; } = string.Empty;
+    protected bool showForm = true;
+    protected string errorMessage = string.Empty;
+
+    private async Task SubmitForm()
+    {
+        var response = await redirectManagerService.Submit(id, link);
+        if (response != RedirectManagerService.SuccessMessage)
+        {
+            errorMessage = response;
+            return;
+        }
+        showForm = false;
+        return;
+    }
+}
+@if (showForm)
+{
+    <EditForm Model="@this" OnValidSubmit="SubmitForm" class="container mt-5" FormName="redirect-form">
+        <DataAnnotationsValidator />
+        <ValidationSummary class="alert alert-danger" />
+
+        <div class="mb-3">
+            <label for="link" class="form-label">Link:</label>
+            <InputText id="link" @bind-Value="link" class="form-control" />
+        </div>
+
+        <button class="btn btn-primary" type="submit">Confirm</button>
+
+        @if (!string.IsNullOrEmpty(errorMessage))
+        {
+            <div class="mt-3 alert alert-danger">
+                @errorMessage
+            </div>
+        }
+    </EditForm>
+}
+else
+{
+    <div class="container mt-5">
+        <div class="alert alert-success">
+            Page redirected
+        </div>
+    </div>
+}

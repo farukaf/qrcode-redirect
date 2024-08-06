@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35122.118
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "qr-redirect", "qr-redirect\qr-redirect.csproj", "{DECC4E47-8446-4B7F-8691-D1245115D8AB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DECC4E47-8446-4B7F-8691-D1245115D8AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DECC4E47-8446-4B7F-8691-D1245115D8AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DECC4E47-8446-4B7F-8691-D1245115D8AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DECC4E47-8446-4B7F-8691-D1245115D8AB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BC348A56-C9F5-466B-820D-A4411AE286E0}
+	EndGlobalSection
+EndGlobal

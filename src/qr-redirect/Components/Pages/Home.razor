@@ -1,0 +1,88 @@
+﻿@page "/"
+@using QRCoder
+@using QrRedirect.Services
+@rendermode InteractiveServer
+@inject NavigationManager navigationManager
+@inject RedirectManagerService redirectManagerService
+@inject StringGeneratorService stringGeneratorService
+@implements IDisposable
+
+<PageTitle>Welcome</PageTitle>
+
+@code {
+    public string id = string.Empty;
+    protected string qrCodeImage = string.Empty;
+    protected RedirectPage? redirectPage;
+    protected string formLink = string.Empty;
+
+    protected override void OnInitialized()
+    {
+        GenerateId();
+        LoadQrCode();
+        RegisterPage();
+    }
+
+    protected void GenerateId()
+    {
+        do
+        {
+            id = stringGeneratorService.Generate(5);
+            if (!redirectManagerService.Exist(id))
+                return;
+
+        } while (true);
+    }
+
+    protected void LoadQrCode()
+    {
+        formLink = RedirectManagerService.Combine(navigationManager.BaseUri, "f/" + id.ToString());
+        QRCodeGenerator qrCodeGenerate = new();
+        QRCodeData qrCodeData = qrCodeGenerate.CreateQrCode(formLink, QRCodeGenerator.ECCLevel.Q);
+        PngByteQRCode qrCode = new(qrCodeData);
+        byte[] qrCodeAsPngByteArr = qrCode.GetGraphic(20);
+        string base64 = Convert.ToBase64String(qrCodeAsPngByteArr);
+        qrCodeImage = string.Format("data:image/png;base64,{0}", base64);
+    }
+
+    protected void RegisterPage()
+    {
+        redirectPage = redirectManagerService.Register(id);
+        redirectPage.Redirect += RedirectPage_OnRedirect;
+    }
+
+    protected Task RedirectPage_OnRedirect(string link)
+    {
+        navigationManager.NavigateTo(link, true);
+        return Task.CompletedTask;
+    }
+
+    protected void UnregisterPage()
+    {
+        redirectManagerService.Unregister(id);
+    }
+
+    protected void RemoveEvent()
+    {
+        if (redirectPage is null)
+            return;
+        redirectPage.Redirect -= RedirectPage_OnRedirect;
+    }
+
+    public void Dispose()
+    {
+        RemoveEvent();
+        UnregisterPage();
+    }
+
+}
+
+<div class="text-center">
+    <img class="m-3"
+         alt="QrCode Scan"
+         src="@qrCodeImage"
+         width="450"
+         id="qr-code"
+         data-test-value="@formLink" />
+    <h1 class="fs-2">Scan the QrCode to redirect this page.</h1>
+    <p class="fs-4">Or access the link: <a class="fs-3" href="@formLink" target="_blank">@formLink</a></p>
+</div>

@@ -1,0 +1,32 @@
+name: CI/CD for ASP.NET Project
+ 
+on: 
+  push:
+    tags:
+      - v*
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2.4.2
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v2.1.0
+        with:
+          dotnet-version: 8.x
+
+      - name: Get version from tag
+        id: version
+        run: echo "VERSION=$(echo $GITHUB_REF | cut -d '/' -f 3)" >> $GITHUB_ENV
+
+      - name: Build and publish Docker image
+        run: |
+          docker build -t farukaf/qrcode-redirect:$VERSION .
+          docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+          docker push farukaf/qrcode-redirect:$VERSION 
+        env:
+          DOCKER_BUILDKIT: 1 
+
