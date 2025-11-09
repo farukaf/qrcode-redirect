@@ -5,5 +5,8 @@ Remore redirection. Simply scan the QR code displayed on your screen to be insta
 
 No aditional dependencies are necessary.
 
+[Docker Hub](https://hub.docker.com/r/farukaf/qrcode-redirect/tags)
+
+
 ## Public docker images
 
