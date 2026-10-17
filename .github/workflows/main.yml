@@ -1,32 +1,88 @@
-name: CI/CD for ASP.NET Project
- 
-on: 
+name: Build and publish
+on:
+  pull_request:
   push:
-    tags:
-      - v*
-
+    branches: [main]
+    tags: ['v*']
+permissions:
+  contents: read
 jobs:
-  build-and-deploy:
+  verify:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2.4.2
-
-      - name: Set up .NET Core
-        uses: actions/setup-dotnet@v2.1.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
         with:
-          dotnet-version: 8.x
-
-      - name: Get version from tag
-        id: version
-        run: echo "VERSION=$(echo $GITHUB_REF | cut -d '/' -f 3)" >> $GITHUB_ENV
-
-      - name: Build and publish Docker image
-        run: |
-          docker build -t farukaf/qrcode-redirect:$VERSION .
-          docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
-          docker push farukaf/qrcode-redirect:$VERSION 
+          global-json-file: global.json
+      - run: dotnet restore tests/QrRedirect.Tests/QrRedirect.Tests.csproj --locked-mode
+      - run: dotnet build src/qr-redirect/qr-redirect.csproj -c Release --no-restore --warnaserror
+      - run: dotnet package list --project tests/QrRedirect.Tests/QrRedirect.Tests.csproj --vulnerable --include-transitive --format json > audit.json
+      - run: python3 -c 'import json; d=json.load(open("audit.json")); assert not any(f.get("topLevelPackages") or f.get("transitivePackages") for p in d["projects"] for f in p.get("frameworks", []))'
+      - run: dotnet test tests/QrRedirect.Tests/QrRedirect.Tests.csproj -c Release --no-restore --filter 'Category!=Browser'
+      - run: docker build -t farukaf/qrcode-redirect:test .
+      - name: Audit built image
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+        with:
+          image-ref: farukaf/qrcode-redirect:test
+          version: v0.76.0
+          scanners: vuln
+          exit-code: '1'
+          severity: UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL
+      - name: Browser integration with Selenium
         env:
-          DOCKER_BUILDKIT: 1 
-
+          QR_BASE_URL: http://localhost:5180
+          QR_ARTIFACTS: ${{ github.workspace }}/TestResults/browser
+        run: |
+          docker run -d --name qr-smoke -p 5180:8080 farukaf/qrcode-redirect:test
+          for attempt in {1..30}; do curl -fsS "$QR_BASE_URL" >/dev/null && break; sleep 1; done
+          dotnet test tests/QrRedirect.Tests/QrRedirect.Tests.csproj -c Release --no-build --filter 'Category=Browser' --logger trx --results-directory TestResults
+      - name: Collect logs
+        if: always()
+        run: mkdir -p TestResults; docker logs qr-smoke > TestResults/container.log 2>&1 || true
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        if: failure()
+        with:
+          name: selenium-diagnostics
+          path: TestResults/
+      - name: Publish tagged release
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+        run: |
+          printf '%s' "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+          docker tag farukaf/qrcode-redirect:test "farukaf/qrcode-redirect:$GITHUB_REF_NAME"
+          docker push "farukaf/qrcode-redirect:$GITHUB_REF_NAME"
+  sonar-status:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Report activation state
+        env:
+          SONAR_ENABLED: ${{ vars.SONAR_ENABLED }}
+        run: |
+          if [ "$SONAR_ENABLED" != true ]; then
+            echo 'Sonar Cloud analysis is disabled. No Sonar quality gate has run; see docs/security/VALIDATION.md for activation.' >> "$GITHUB_STEP_SUMMARY"
+          fi
+  sonar:
+    if: vars.SONAR_ENABLED == 'true' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
+        with:
+          global-json-file: global.json
+      - name: Analyze and wait for quality gate
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_ORGANIZATION: ${{ vars.SONAR_ORGANIZATION }}
+          SONAR_PROJECT_KEY: ${{ vars.SONAR_PROJECT_KEY }}
+        run: |
+          test -n "$SONAR_TOKEN" && test -n "$SONAR_ORGANIZATION" && test -n "$SONAR_PROJECT_KEY" || { echo 'Sonar enabled but required token/organization/project key missing'; exit 1; }
+          dotnet tool restore
+          dotnet sonarscanner begin /k:"$SONAR_PROJECT_KEY" /o:"$SONAR_ORGANIZATION" /d:sonar.host.url=https://sonarcloud.io /d:sonar.token="$SONAR_TOKEN" /d:sonar.qualitygate.wait=true /d:sonar.cs.opencover.reportsPaths='**/coverage.opencover.xml' /d:sonar.exclusions='**/wwwroot/bootstrap/**'
+          dotnet restore tests/QrRedirect.Tests/QrRedirect.Tests.csproj --locked-mode
+          dotnet build tests/QrRedirect.Tests/QrRedirect.Tests.csproj -c Release --no-restore --no-incremental
+          dotnet test tests/QrRedirect.Tests/QrRedirect.Tests.csproj -c Release --no-build --filter 'Category!=Browser' --collect:'XPlat Code Coverage' -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
+          dotnet sonarscanner end /d:sonar.token="$SONAR_TOKEN"

@@ -1,4 +1,4 @@
-﻿@page "/f/{id}"
+@page "/f/{id}"
 @using QrRedirect.Services
 @rendermode InteractiveServer
 @inject RedirectManagerService redirectManagerService
@@ -6,7 +6,17 @@
 <PageTitle>Redirect the other page</PageTitle>
 
 @code {
-    [Parameter] public string id { get; set; }
+    protected bool isInteractive;
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            isInteractive = true;
+            StateHasChanged();
+        }
+    }
+
+    [Parameter] public string id { get; set; } = string.Empty;
     protected string link { get; set; } = string.Empty;
     protected bool showForm = true;
     protected string errorMessage = string.Empty;
@@ -25,7 +35,7 @@
 }
 @if (showForm)
 {
-    <EditForm Model="@this" OnValidSubmit="SubmitForm" class="container mt-5" FormName="redirect-form">
+    <EditForm Model="@this" OnValidSubmit="SubmitForm" class="container mt-5" FormName="redirect-form" data-interactive="@isInteractive.ToString().ToLowerInvariant()">
         <DataAnnotationsValidator />
         <ValidationSummary class="alert alert-danger" />
 

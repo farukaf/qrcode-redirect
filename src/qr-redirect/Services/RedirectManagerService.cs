@@ -1,4 +1,4 @@
-﻿using System.Collections.Concurrent;
+using System.Collections.Concurrent;
 
 namespace QrRedirect.Services;
 
@@ -49,16 +49,24 @@ public class RedirectManagerService
         return SuccessMessage;
     }
 
-    private bool ValidateLink(string link, out Uri uri)
+    private static bool ValidateLink(string link, out Uri uri)
     {
-        if (!link.StartsWith("http"))
+        if (!link.Contains(':'))
             link = "https://" + link;
-        return Uri.TryCreate(link, UriKind.Absolute, out uri);
+        if (Uri.TryCreate(link, UriKind.Absolute, out var parsed)
+            && (parsed.Scheme == Uri.UriSchemeHttp || parsed.Scheme == Uri.UriSchemeHttps)
+            && !string.IsNullOrWhiteSpace(parsed.Host) && string.IsNullOrEmpty(parsed.UserInfo))
+        {
+            uri = parsed;
+            return true;
+        }
+        uri = null!;
+        return false;
     }
 }
 
 public class RedirectPage
 {
-    public string Id { get; set; }
+    public string Id { get; set; } = string.Empty;
     public Func<string, Task>? Redirect { get; set; }
 }
