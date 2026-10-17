@@ -1,4 +1,4 @@
 Test run for /home/agent/work/personal-apps-modernization/qrcode-redirect/tests/QrRedirect.Tests/bin/Release/net10.0/QrRedirect.Tests.dll (.NETCoreApp,Version=v10.0)
 A total of 1 test files matched the specified pattern.
 
-Passed!  - Failed:     0, Passed:     9, Skipped:     0, Total:     9, Duration: 1 s - QrRedirect.Tests.dll (net10.0)
+Passed!  - Failed:     0, Passed:     9, Skipped:     0, Total:     9, Duration: 821 ms - QrRedirect.Tests.dll (net10.0)

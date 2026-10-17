@@ -3,18 +3,18 @@
   "Trivy": {
     "Version": "0.76.0"
   },
-  "ReportID": "01a14bc4-77c2-79e8-9bb3-5db786fcb808",
-  "CreatedAt": "2026-10-17T18:28:49.346651455-03:00",
-  "ArtifactID": "sha256:c42b61d8fcb0998a0289952410974d73538e8cef00da29eb2bcfd7dd576db3f1",
+  "ReportID": "01a14bc6-ea66-7786-9f9f-c0b965940584",
+  "CreatedAt": "2026-10-17T18:31:29.766494678-03:00",
+  "ArtifactID": "sha256:9fd7fa7092150df92c6075fe657941df0e65bc2a2017398d830e05cd8ead88e2",
   "ArtifactName": ".",
   "ArtifactType": "repository",
   "Metadata": {
     "RepoURL": "https://github.com/farukaf/qrcode-redirect.git",
     "Branch": "upgrade/dotnet10-security",
-    "Commit": "5c75e6bd0da5ec76ad632a40dbe14b90c16384f6",
-    "CommitMsg": "Include Docker Hub link in README\n\nAdd Docker Hub link to README",
-    "Author": "Faruk \u003cfaruk_feres@hotmail.com\u003e",
-    "Committer": "GitHub \u003cnoreply@github.com\u003e"
+    "Commit": "7bf15562803340adef65ece489c9fe68279ab5ad",
+    "CommitMsg": "Upgrade to .NET 10 and harden dependencies, redirects and CI",
+    "Author": "Faruk \u003cfaruk@mottu.com.br\u003e",
+    "Committer": "Faruk \u003cfaruk@mottu.com.br\u003e"
   },
   "Results": [
     {
@@ -122,7 +122,7 @@
           "Name": "Microsoft.AspNetCore.Mvc.Testing",
           "Identifier": {
             "PURL": "pkg:nuget/Microsoft.AspNetCore.Mvc.Testing@10.0.13",
-            "UID": "652e277f5cd60434"
+            "UID": "addb85146507aa06"
           },
           "Version": "10.0.13",
           "Licenses": [
@@ -130,9 +130,9 @@
           ],
           "Relationship": "direct",
           "DependsOn": [
-            "Microsoft.Extensions.Hosting@10.0.13",
             "Microsoft.AspNetCore.TestHost@10.0.13",
-            "Microsoft.Extensions.DependencyModel@10.0.13"
+            "Microsoft.Extensions.DependencyModel@10.0.13",
+            "Microsoft.Extensions.Hosting@10.0.13"
           ],
           "Locations": [
             {
@@ -147,7 +147,7 @@
           "Name": "Microsoft.NET.Test.Sdk",
           "Identifier": {
             "PURL": "pkg:nuget/Microsoft.NET.Test.Sdk@17.14.1",
-            "UID": "8dc50875544a0ac4"
+            "UID": "151932635c7a5993"
           },
           "Version": "17.14.1",
           "Licenses": [
@@ -155,8 +155,8 @@
           ],
           "Relationship": "direct",
           "DependsOn": [
-            "Microsoft.TestPlatform.TestHost@17.14.1",
-            "Microsoft.CodeCoverage@17.14.1"
+            "Microsoft.CodeCoverage@17.14.1",
+            "Microsoft.TestPlatform.TestHost@17.14.1"
           ],
           "Locations": [
             {
@@ -210,6 +210,46 @@
           "AnalyzedBy": "nuget"
         },
         {
+          "ID": "StbImageSharp@2.30.16",
+          "Name": "StbImageSharp",
+          "Identifier": {
+            "PURL": "pkg:nuget/StbImageSharp@2.30.16",
+            "UID": "faaaeecf515459e1"
+          },
+          "Version": "2.30.16",
+          "Licenses": [
+            "Unlicense OR MIT"
+          ],
+          "Relationship": "direct",
+          "Locations": [
+            {
+              "StartLine": 47,
+              "EndLine": 52
+            }
+          ],
+          "AnalyzedBy": "nuget"
+        },
+        {
+          "ID": "ZXing.Net@0.16.11",
+          "Name": "ZXing.Net",
+          "Identifier": {
+            "PURL": "pkg:nuget/ZXing.Net@0.16.11",
+            "UID": "205360b6323e8048"
+          },
+          "Version": "0.16.11",
+          "Licenses": [
+            "Apache-2.0"
+          ],
+          "Relationship": "direct",
+          "Locations": [
+            {
+              "StartLine": 70,
+              "EndLine": 75
+            }
+          ],
+          "AnalyzedBy": "nuget"
+        },
+        {
           "ID": "coverlet.collector@6.0.4",
           "Name": "coverlet.collector",
           "Identifier": {
@@ -234,7 +274,7 @@
           "Name": "xunit",
           "Identifier": {
             "PURL": "pkg:nuget/xunit@2.9.3",
-            "UID": "9262c6e84ef4c75e"
+            "UID": "405d4060929541c0"
           },
           "Version": "2.9.3",
           "Licenses": [
@@ -248,8 +288,8 @@
           ],
           "Locations": [
             {
-              "StartLine": 47,
-              "EndLine": 57
+              "StartLine": 53,
+              "EndLine": 63
             }
           ],
           "AnalyzedBy": "nuget"
@@ -259,7 +299,7 @@
           "Name": "xunit.runner.visualstudio",
           "Identifier": {
             "PURL": "pkg:nuget/xunit.runner.visualstudio@3.1.4",
-            "UID": "3bae87de84e28db9"
+            "UID": "ce159afc795064b3"
           },
           "Version": "3.1.4",
           "Licenses": [
@@ -268,8 +308,8 @@
           "Relationship": "direct",
           "Locations": [
             {
-              "StartLine": 58,
-              "EndLine": 63
+              "StartLine": 64,
+              "EndLine": 69
             }
           ],
           "AnalyzedBy": "nuget"
@@ -279,7 +319,7 @@
           "Name": "Microsoft.AspNetCore.TestHost",
           "Identifier": {
             "PURL": "pkg:nuget/Microsoft.AspNetCore.TestHost@10.0.13",
-            "UID": "f934d4da08b1e86b"
+            "UID": "62524b6773a82020"
           },
           "Version": "10.0.13",
           "Licenses": [
@@ -289,8 +329,8 @@
           "Relationship": "indirect",
           "Locations": [
             {
-              "StartLine": 64,
-              "EndLine": 68
+              "StartLine": 76,
+              "EndLine": 80
             }
           ],
           "AnalyzedBy": "nuget"
@@ -300,7 +340,7 @@
           "Name": "Microsoft.CodeCoverage",
           "Identifier": {
             "PURL": "pkg:nuget/Microsoft.CodeCoverage@17.14.1",
-            "UID": "c8b3649c5c8fd3c4"
+            "UID": "739ec1cf64523caa"
           },
           "Version": "17.14.1",
           "Licenses": [
@@ -310,8 +350,8 @@
           "Relationship": "indirect",
           "Locations": [
             {
-              "StartLine": 69,
-              "EndLine": 73
+              "StartLine": 81,
+              "EndLine": 85
             }
           ],
           "AnalyzedBy": "nuget"
@@ -321,7 +361,7 @@
           "Name": "Microsoft.Extensions.Configuration",
           "Identifier": {
             "PURL": "pkg:nuget/Microsoft.Extensions.Configuration@10.0.13",
-            "UID": "69297f580e4d9cec"
+            "UID": "489020cc09163e8a"
           },
           "Version": "10.0.13",
           "Licenses": [
@@ -335,8 +375,8 @@
           ],
           "Locations": [
             {
-              "StartLine": 74,
-              "EndLine": 82
+              "StartLine": 86,
+              "EndLine": 94
             }
           ],
           "AnalyzedBy": "nuget"
@@ -346,7 +386,7 @@
           "Name": "Microsoft.Extensions.Configuration.Abstractions",
           "Identifier": {
             "PURL": "pkg:nuget/Microsoft.Extensions.Configuration.Abstractions@10.0.13",
-            "UID": "7bdc5ae3ff5a9bbe"
+            "UID": "fd68ee5d7ec6dfc3"
           },
           "Version": "10.0.13",
           "Licenses": [
@@ -359,8 +399,8 @@
           ],
           "Locations": [
             {
-              "StartLine": 83,
-              "EndLine": 90
+              "StartLine": 95,
+              "EndLine": 102
             }
           ],
           "AnalyzedBy": "nuget"
@@ -370,7 +410,7 @@
           "Name": "Microsoft.Extensions.Configuration.Binder",
           "Identifier": {
             "PURL": "pkg:nuget/Microsoft.Extensions.Configuration.Binder@10.0.13",
-            "UID": "57ee35c7387594f3"
+            "UID": "1aa2153991034ada"
           },
           "Version": "10.0.13",
           "Licenses": [
@@ -384,8 +424,8 @@
           ],
           "Locations": [
             {
-              "StartLine": 91,
-              "EndLine": 99
+              "StartLine": 103,
+              "EndLine": 111
             }
           ],
           "AnalyzedBy": "nuget"
@@ -395,32 +435,7 @@
           "Name": "Microsoft.Extensions.Configuration.CommandLine",
           "Identifier": {
             "PURL": "pkg:nuget/Microsoft.Extensions.Configuration.CommandLine@10.0.13",
-            "UID": "8ebb0fbfe8fac099"
-          },
-          "Version": "10.0.13",
-          "Licenses": [
-            "MIT"
-          ],
-          "Indirect": true,
-          "Relationship": "indirect",
-          "DependsOn": [
-            "Microsoft.Extensions.Configuration.Abstractions@10.0.13",
-            "Microsoft.Extensions.Configuration@10.0.13"
-          ],
-          "Locations": [
-            {
-              "StartLine": 100,
-              "EndLine": 108
-            }
-          ],
-          "AnalyzedBy": "nuget"
-        },
-        {
-          "ID": "Microsoft.Extensions.Configuration.EnvironmentVariables@10.0.13",
-          "Name": "Microsoft.Extensions.Configuration.EnvironmentVariables",
-          "Identifier": {
-            "PURL": "pkg:nuget/Microsoft.Extensions.Configuration.EnvironmentVariables@10.0.13",
-            "UID": "edd27409114764b"
+            "UID": "ea8ab0a3cb807c18"
           },
           "Version": "10.0.13",
           "Licenses": [
@@ -434,8 +449,33 @@
           ],
           "Locations": [
             {
-              "StartLine": 109,
-              "EndLine": 117
+              "StartLine": 112,
+              "EndLine": 120
+            }
+          ],
+          "AnalyzedBy": "nuget"
+        },
+        {
+          "ID": "Microsoft.Extensions.Configuration.EnvironmentVariables@10.0.13",
+          "Name": "Microsoft.Extensions.Configuration.EnvironmentVariables",
+          "Identifier": {
+            "PURL": "pkg:nuget/Microsoft.Extensions.Configuration.EnvironmentVariables@10.0.13",
+            "UID": "46afb0ff6e1da67b"
+          },
+          "Version": "10.0.13",
+          "Licenses": [
+            "MIT"
+          ],
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "Microsoft.Extensions.Configuration@10.0.13",
+            "Microsoft.Extensions.Configuration.Abstractions@10.0.13"
+          ],
+          "Locations": [
+            {
+              "StartLine": 121,
+              "EndLine": 129
             }
           ],
           "AnalyzedBy": "nuget"
@@ -445,7 +485,7 @@
           "Name": "Microsoft.Extensions.Configuration.FileExtensions",
           "Identifier": {
             "PURL": "pkg:nuget/Microsoft.Extensions.Configuration.FileExtensions@10.0.13",
-            "UID": "8115b22ff480f7d5"
+            "UID": "17f964b8cc4afa59"
           },
           "Version": "10.0.13",
           "Licenses": [
@@ -462,8 +502,8 @@
           ],
           "Locations": [
             {
-              "StartLine": 118,
-              "EndLine": 129
+              "StartLine": 130,
+              "EndLine": 141
             }
           ],
           "AnalyzedBy": "nuget"
@@ -473,7 +513,7 @@
           "Name": "Microsoft.Extensions.Configuration.Json",
           "Identifier": {
             "PURL": "pkg:nuget/Microsoft.Extensions.Configuration.Json@10.0.13",
-            "UID": "c8697a538416d900"
+            "UID": "62e31cde36076243"
           },
           "Version": "10.0.13",
           "Licenses": [
@@ -482,15 +522,15 @@
           "Indirect": true,
           "Relationship": "indirect",
           "DependsOn": [
+            "Microsoft.Extensions.Configuration.FileExtensions@10.0.13",
             "Microsoft.Extensions.FileProviders.Abstractions@10.0.13",
             "Microsoft.Extensions.Configuration@10.0.13",
-            "Microsoft.Extensions.Configuration.Abstractions@10.0.13",
-            "Microsoft.Extensions.Configuration.FileExtensions@10.0.13"
+            "Microsoft.Extensions.Configuration.Abstractions@10.0.13"
           ],
           "Locations": [
             {
-              "StartLine": 130,
-              "EndLine": 140
+              "StartLine": 142,
+              "EndLine": 152
             }
           ],
           "AnalyzedBy": "nuget"
@@ -500,7 +540,7 @@
           "Name": "Microsoft.Extensions.Configuration.UserSecrets",
           "Identifier": {
             "PURL": "pkg:nuget/Microsoft.Extensions.Configuration.UserSecrets@10.0.13",
-            "UID": "f441101975513083"
+            "UID": "cbbc5e797fab4be2"
           },
           "Version": "10.0.13",
           "Licenses": [
@@ -509,15 +549,15 @@
           "Indirect": true,
           "Relationship": "indirect",
           "DependsOn": [
-            "Microsoft.Extensions.Configuration.Json@10.0.13",
-            "Microsoft.Extensions.FileProviders.Abstractions@10.0.13",
             "Microsoft.Extensions.FileProviders.Physical@10.0.13",
-            "Microsoft.Extensions.Configuration.Abstractions@10.0.13"
+            "Microsoft.Extensions.Configuration.Abstractions@10.0.13",
+            "Microsoft.Extensions.Configuration.Json@10.0.13",
+            "Microsoft.Extensions.FileProviders.Abstractions@10.0.13"
           ],
           "Locations": [
             {
-              "StartLine": 141,
-              "EndLine": 151
+              "StartLine": 153,
+              "EndLine": 163
             }
           ],
           "AnalyzedBy": "nuget"
@@ -527,7 +567,7 @@
           "Name": "Microsoft.Extensions.DependencyInjection",
           "Identifier": {
             "PURL": "pkg:nuget/Microsoft.Extensions.DependencyInjection@10.0.13",
-            "UID": "b5ee8d2962d11757"
+            "UID": "eb9485aed6591d5"
           },
           "Version": "10.0.13",
           "Licenses": [
@@ -540,8 +580,8 @@
           ],
           "Locations": [
             {
-              "StartLine": 152,
-              "EndLine": 159
+              "StartLine": 164,
+              "EndLine": 171
             }
           ],
           "AnalyzedBy": "nuget"
@@ -551,7 +591,7 @@
           "Name": "Microsoft.Extensions.DependencyInjection.Abstractions",
           "Identifier": {
             "PURL": "pkg:nuget/Microsoft.Extensions.DependencyInjection.Abstractions@10.0.13",
-            "UID": "3ad4c431e9cc443e"
+            "UID": "6819473306efa7c4"
           },
           "Version": "10.0.13",
           "Licenses": [
@@ -561,8 +601,8 @@
           "Relationship": "indirect",
           "Locations": [
             {
-              "StartLine": 160,
-              "EndLine": 164
+              "StartLine": 172,
+              "EndLine": 176
             }
           ],
           "AnalyzedBy": "nuget"
@@ -572,7 +612,7 @@
           "Name": "Microsoft.Extensions.DependencyModel",
           "Identifier": {
             "PURL": "pkg:nuget/Microsoft.Extensions.DependencyModel@10.0.13",
-            "UID": "7b3ac645a3343fc3"
+            "UID": "2c10421f442cfd2a"
           },
           "Version": "10.0.13",
           "Licenses": [
@@ -582,8 +622,8 @@
           "Relationship": "indirect",
           "Locations": [
             {
-              "StartLine": 165,
-              "EndLine": 169
+              "StartLine": 177,
+              "EndLine": 181
             }
           ],
           "AnalyzedBy": "nuget"
@@ -593,7 +633,7 @@
           "Name": "Microsoft.Extensions.Diagnostics",
           "Identifier": {
             "PURL": "pkg:nuget/Microsoft.Extensions.Diagnostics@10.0.13",
-            "UID": "d04ba20f3a289c90"
+            "UID": "eafe63a07a9556d4"
           },
           "Version": "10.0.13",
           "Licenses": [
@@ -602,14 +642,14 @@
           "Indirect": true,
           "Relationship": "indirect",
           "DependsOn": [
+            "Microsoft.Extensions.Options.ConfigurationExtensions@10.0.13",
             "Microsoft.Extensions.Configuration@10.0.13",
-            "Microsoft.Extensions.Diagnostics.Abstractions@10.0.13",
-            "Microsoft.Extensions.Options.ConfigurationExtensions@10.0.13"
+            "Microsoft.Extensions.Diagnostics.Abstractions@10.0.13"
           ],
           "Locations": [
             {
-              "StartLine": 170,
-              "EndLine": 179
+              "StartLine": 182,
+              "EndLine": 191
             }
           ],
           "AnalyzedBy": "nuget"
@@ -619,7 +659,7 @@
           "Name": "Microsoft.Extensions.Diagnostics.Abstractions",
           "Identifier": {
             "PURL": "pkg:nuget/Microsoft.Extensions.Diagnostics.Abstractions@10.0.13",
-            "UID": "9901cd07d2eab100"
+            "UID": "544c80d8e78ccf30"
           },
           "Version": "10.0.13",
           "Licenses": [
@@ -633,8 +673,8 @@
           ],
           "Locations": [
             {
-              "StartLine": 180,
-              "EndLine": 188
+              "StartLine": 192,
+              "EndLine": 200
             }
           ],
           "AnalyzedBy": "nuget"
@@ -644,7 +684,7 @@
           "Name": "Microsoft.Extensions.FileProviders.Abstractions",
           "Identifier": {
             "PURL": "pkg:nuget/Microsoft.Extensions.FileProviders.Abstractions@10.0.13",
-            "UID": "c3dc0f7e6e2c1804"
+            "UID": "9b0e1e3d0e69dea6"
           },
           "Version": "10.0.13",
           "Licenses": [
@@ -657,8 +697,8 @@
           ],
           "Locations": [
             {
-              "StartLine": 189,
-              "EndLine": 196
+              "StartLine": 201,
+              "EndLine": 208
             }
           ],
           "AnalyzedBy": "nuget"
@@ -668,7 +708,7 @@
           "Name": "Microsoft.Extensions.FileProviders.Physical",
           "Identifier": {
             "PURL": "pkg:nuget/Microsoft.Extensions.FileProviders.Physical@10.0.13",
-            "UID": "98026770a1519fc9"
+            "UID": "d8c680f136886920"
           },
           "Version": "10.0.13",
           "Licenses": [
@@ -683,8 +723,8 @@
           ],
           "Locations": [
             {
-              "StartLine": 197,
-              "EndLine": 206
+              "StartLine": 209,
+              "EndLine": 218
             }
           ],
           "AnalyzedBy": "nuget"
@@ -694,7 +734,7 @@
           "Name": "Microsoft.Extensions.FileSystemGlobbing",
           "Identifier": {
             "PURL": "pkg:nuget/Microsoft.Extensions.FileSystemGlobbing@10.0.13",
-            "UID": "2f14fe7e88ed69a5"
+            "UID": "8d94a699837ab34"
           },
           "Version": "10.0.13",
           "Licenses": [
@@ -704,8 +744,8 @@
           "Relationship": "indirect",
           "Locations": [
             {
-              "StartLine": 207,
-              "EndLine": 211
+              "StartLine": 219,
+              "EndLine": 223
             }
           ],
           "AnalyzedBy": "nuget"
@@ -715,7 +755,7 @@
           "Name": "Microsoft.Extensions.Hosting",
           "Identifier": {
             "PURL": "pkg:nuget/Microsoft.Extensions.Hosting@10.0.13",
-            "UID": "99ae9d01e7c7060c"
+            "UID": "7a2295f3560c8168"
           },
           "Version": "10.0.13",
           "Licenses": [
@@ -724,33 +764,33 @@
           "Indirect": true,
           "Relationship": "indirect",
           "DependsOn": [
-            "Microsoft.Extensions.Options@10.0.13",
+            "Microsoft.Extensions.Configuration.UserSecrets@10.0.13",
+            "Microsoft.Extensions.FileProviders.Physical@10.0.13",
             "Microsoft.Extensions.Logging@10.0.13",
             "Microsoft.Extensions.Logging.Console@10.0.13",
-            "Microsoft.Extensions.Configuration@10.0.13",
-            "Microsoft.Extensions.FileProviders.Abstractions@10.0.13",
-            "Microsoft.Extensions.Logging.Abstractions@10.0.13",
-            "Microsoft.Extensions.Logging.Configuration@10.0.13",
-            "Microsoft.Extensions.Logging.EventSource@10.0.13",
+            "Microsoft.Extensions.Configuration.Abstractions@10.0.13",
             "Microsoft.Extensions.Configuration.Binder@10.0.13",
-            "Microsoft.Extensions.Configuration.CommandLine@10.0.13",
+            "Microsoft.Extensions.FileProviders.Abstractions@10.0.13",
+            "Microsoft.Extensions.Logging.Debug@10.0.13",
+            "Microsoft.Extensions.Logging.EventLog@10.0.13",
+            "Microsoft.Extensions.Options@10.0.13",
             "Microsoft.Extensions.Configuration.Json@10.0.13",
-            "Microsoft.Extensions.Configuration.UserSecrets@10.0.13",
+            "Microsoft.Extensions.Hosting.Abstractions@10.0.13",
+            "Microsoft.Extensions.Logging.Abstractions@10.0.13",
+            "Microsoft.Extensions.DependencyInjection@10.0.13",
             "Microsoft.Extensions.DependencyInjection.Abstractions@10.0.13",
             "Microsoft.Extensions.Diagnostics@10.0.13",
-            "Microsoft.Extensions.FileProviders.Physical@10.0.13",
-            "Microsoft.Extensions.Configuration.Abstractions@10.0.13",
+            "Microsoft.Extensions.Logging.Configuration@10.0.13",
+            "Microsoft.Extensions.Logging.EventSource@10.0.13",
+            "Microsoft.Extensions.Configuration@10.0.13",
+            "Microsoft.Extensions.Configuration.CommandLine@10.0.13",
             "Microsoft.Extensions.Configuration.EnvironmentVariables@10.0.13",
-            "Microsoft.Extensions.Configuration.FileExtensions@10.0.13",
-            "Microsoft.Extensions.DependencyInjection@10.0.13",
-            "Microsoft.Extensions.Hosting.Abstractions@10.0.13",
-            "Microsoft.Extensions.Logging.Debug@10.0.13",
-            "Microsoft.Extensions.Logging.EventLog@10.0.13"
+            "Microsoft.Extensions.Configuration.FileExtensions@10.0.13"
           ],
           "Locations": [
             {
-              "StartLine": 212,
-              "EndLine": 240
+              "StartLine": 224,
+              "EndLine": 252
             }
           ],
           "AnalyzedBy": "nuget"
@@ -760,7 +800,7 @@
           "Name": "Microsoft.Extensions.Hosting.Abstractions",
           "Identifier": {
             "PURL": "pkg:nuget/Microsoft.Extensions.Hosting.Abstractions@10.0.13",
-            "UID": "1f5b203f933b3b39"
+            "UID": "b34e7afb878310ce"
           },
           "Version": "10.0.13",
           "Licenses": [
@@ -777,8 +817,8 @@
           ],
           "Locations": [
             {
-              "StartLine": 241,
-              "EndLine": 252
+              "StartLine": 253,
+              "EndLine": 264
             }
           ],
           "AnalyzedBy": "nuget"
@@ -788,7 +828,7 @@
           "Name": "Microsoft.Extensions.Logging",
           "Identifier": {
             "PURL": "pkg:nuget/Microsoft.Extensions.Logging@10.0.13",
-            "UID": "e8b9bc4ac1a1c894"
+            "UID": "6e13a39c8fe6ecd1"
           },
           "Version": "10.0.13",
           "Licenses": [
@@ -803,8 +843,8 @@
           ],
           "Locations": [
             {
-              "StartLine": 253,
-              "EndLine": 262
+              "StartLine": 265,
+              "EndLine": 274
             }
           ],
           "AnalyzedBy": "nuget"
@@ -814,7 +854,7 @@
           "Name": "Microsoft.Extensions.Logging.Abstractions",
           "Identifier": {
             "PURL": "pkg:nuget/Microsoft.Extensions.Logging.Abstractions@10.0.13",
-            "UID": "9a045d7d7bceb160"
+            "UID": "66d58bc12825a43c"
           },
           "Version": "10.0.13",
           "Licenses": [
@@ -827,8 +867,8 @@
           ],
           "Locations": [
             {
-              "StartLine": 263,
-              "EndLine": 270
+              "StartLine": 275,
+              "EndLine": 282
             }
           ],
           "AnalyzedBy": "nuget"
@@ -838,7 +878,7 @@
           "Name": "Microsoft.Extensions.Logging.Configuration",
           "Identifier": {
             "PURL": "pkg:nuget/Microsoft.Extensions.Logging.Configuration@10.0.13",
-            "UID": "db192b667d86c1bd"
+            "UID": "aa85a08e9e9b4a9e"
           },
           "Version": "10.0.13",
           "Licenses": [
@@ -847,19 +887,19 @@
           "Indirect": true,
           "Relationship": "indirect",
           "DependsOn": [
-            "Microsoft.Extensions.Configuration.Abstractions@10.0.13",
-            "Microsoft.Extensions.Configuration.Binder@10.0.13",
-            "Microsoft.Extensions.DependencyInjection.Abstractions@10.0.13",
             "Microsoft.Extensions.Logging@10.0.13",
             "Microsoft.Extensions.Logging.Abstractions@10.0.13",
             "Microsoft.Extensions.Options@10.0.13",
             "Microsoft.Extensions.Options.ConfigurationExtensions@10.0.13",
-            "Microsoft.Extensions.Configuration@10.0.13"
+            "Microsoft.Extensions.Configuration@10.0.13",
+            "Microsoft.Extensions.Configuration.Abstractions@10.0.13",
+            "Microsoft.Extensions.Configuration.Binder@10.0.13",
+            "Microsoft.Extensions.DependencyInjection.Abstractions@10.0.13"
           ],
           "Locations": [
             {
-              "StartLine": 271,
-              "EndLine": 285
+              "StartLine": 283,
+              "EndLine": 297
             }
           ],
           "AnalyzedBy": "nuget"
@@ -869,7 +909,7 @@
           "Name": "Microsoft.Extensions.Logging.Console",
           "Identifier": {
             "PURL": "pkg:nuget/Microsoft.Extensions.Logging.Console@10.0.13",
-            "UID": "55e2a6c0a92a0482"
+            "UID": "d10c5b0c5ac964d3"
           },
           "Version": "10.0.13",
           "Licenses": [
@@ -886,8 +926,8 @@
           ],
           "Locations": [
             {
-              "StartLine": 286,
-              "EndLine": 297
+              "StartLine": 298,
+              "EndLine": 309
             }
           ],
           "AnalyzedBy": "nuget"
@@ -897,7 +937,7 @@
           "Name": "Microsoft.Extensions.Logging.Debug",
           "Identifier": {
             "PURL": "pkg:nuget/Microsoft.Extensions.Logging.Debug@10.0.13",
-            "UID": "dc6ed9872664cf6f"
+            "UID": "b91a0ed5fa126cf1"
           },
           "Version": "10.0.13",
           "Licenses": [
@@ -906,14 +946,14 @@
           "Indirect": true,
           "Relationship": "indirect",
           "DependsOn": [
+            "Microsoft.Extensions.DependencyInjection.Abstractions@10.0.13",
             "Microsoft.Extensions.Logging@10.0.13",
-            "Microsoft.Extensions.Logging.Abstractions@10.0.13",
-            "Microsoft.Extensions.DependencyInjection.Abstractions@10.0.13"
+            "Microsoft.Extensions.Logging.Abstractions@10.0.13"
           ],
           "Locations": [
             {
-              "StartLine": 298,
-              "EndLine": 307
+              "StartLine": 310,
+              "EndLine": 319
             }
           ],
           "AnalyzedBy": "nuget"
@@ -923,7 +963,7 @@
           "Name": "Microsoft.Extensions.Logging.EventLog",
           "Identifier": {
             "PURL": "pkg:nuget/Microsoft.Extensions.Logging.EventLog@10.0.13",
-            "UID": "3105189fee9b3537"
+            "UID": "ad5c5cc2cb7552ab"
           },
           "Version": "10.0.13",
           "Licenses": [
@@ -932,39 +972,11 @@
           "Indirect": true,
           "Relationship": "indirect",
           "DependsOn": [
-            "Microsoft.Extensions.DependencyInjection.Abstractions@10.0.13",
             "Microsoft.Extensions.Logging@10.0.13",
             "Microsoft.Extensions.Logging.Abstractions@10.0.13",
             "Microsoft.Extensions.Options@10.0.13",
-            "System.Diagnostics.EventLog@10.0.13"
-          ],
-          "Locations": [
-            {
-              "StartLine": 308,
-              "EndLine": 319
-            }
-          ],
-          "AnalyzedBy": "nuget"
-        },
-        {
-          "ID": "Microsoft.Extensions.Logging.EventSource@10.0.13",
-          "Name": "Microsoft.Extensions.Logging.EventSource",
-          "Identifier": {
-            "PURL": "pkg:nuget/Microsoft.Extensions.Logging.EventSource@10.0.13",
-            "UID": "82f020f7de3f0dfa"
-          },
-          "Version": "10.0.13",
-          "Licenses": [
-            "MIT"
-          ],
-          "Indirect": true,
-          "Relationship": "indirect",
-          "DependsOn": [
-            "Microsoft.Extensions.DependencyInjection.Abstractions@10.0.13",
-            "Microsoft.Extensions.Logging@10.0.13",
-            "Microsoft.Extensions.Logging.Abstractions@10.0.13",
-            "Microsoft.Extensions.Options@10.0.13",
-            "Microsoft.Extensions.Primitives@10.0.13"
+            "System.Diagnostics.EventLog@10.0.13",
+            "Microsoft.Extensions.DependencyInjection.Abstractions@10.0.13"
           ],
           "Locations": [
             {
@@ -975,11 +987,39 @@
           "AnalyzedBy": "nuget"
         },
         {
+          "ID": "Microsoft.Extensions.Logging.EventSource@10.0.13",
+          "Name": "Microsoft.Extensions.Logging.EventSource",
+          "Identifier": {
+            "PURL": "pkg:nuget/Microsoft.Extensions.Logging.EventSource@10.0.13",
+            "UID": "f1cfe247bc13e4a"
+          },
+          "Version": "10.0.13",
+          "Licenses": [
+            "MIT"
+          ],
+          "Indirect": true,
+          "Relationship": "indirect",
+          "DependsOn": [
+            "Microsoft.Extensions.Logging@10.0.13",
+            "Microsoft.Extensions.Logging.Abstractions@10.0.13",
+            "Microsoft.Extensions.Options@10.0.13",
+            "Microsoft.Extensions.Primitives@10.0.13",
+            "Microsoft.Extensions.DependencyInjection.Abstractions@10.0.13"
+          ],
+          "Locations": [
+            {
+              "StartLine": 332,
+              "EndLine": 343
+            }
+          ],
+          "AnalyzedBy": "nuget"
+        },
+        {
           "ID": "Microsoft.Extensions.Options@10.0.13",
           "Name": "Microsoft.Extensions.Options",
           "Identifier": {
             "PURL": "pkg:nuget/Microsoft.Extensions.Options@10.0.13",
-            "UID": "e21278bb5be5492f"
+            "UID": "bea8bef5238c8ddc"
           },
           "Version": "10.0.13",
           "Licenses": [
@@ -993,8 +1033,8 @@
           ],
           "Locations": [
             {
-              "StartLine": 332,
-              "EndLine": 340
+              "StartLine": 344,
+              "EndLine": 352
             }
           ],
           "AnalyzedBy": "nuget"
@@ -1004,7 +1044,7 @@
           "Name": "Microsoft.Extensions.Options.ConfigurationExtensions",
           "Identifier": {
             "PURL": "pkg:nuget/Microsoft.Extensions.Options.ConfigurationExtensions@10.0.13",
-            "UID": "6868f20de3e693cf"
+            "UID": "fdb7b47ba8392a6e"
           },
           "Version": "10.0.13",
           "Licenses": [
@@ -1013,16 +1053,16 @@
           "Indirect": true,
           "Relationship": "indirect",
           "DependsOn": [
-            "Microsoft.Extensions.Configuration.Abstractions@10.0.13",
             "Microsoft.Extensions.Configuration.Binder@10.0.13",
             "Microsoft.Extensions.DependencyInjection.Abstractions@10.0.13",
             "Microsoft.Extensions.Options@10.0.13",
-            "Microsoft.Extensions.Primitives@10.0.13"
+            "Microsoft.Extensions.Primitives@10.0.13",
+            "Microsoft.Extensions.Configuration.Abstractions@10.0.13"
           ],
           "Locations": [
             {
-              "StartLine": 341,
-              "EndLine": 352
+              "StartLine": 353,
+              "EndLine": 364
             }
           ],
           "AnalyzedBy": "nuget"
@@ -1032,7 +1072,7 @@
           "Name": "Microsoft.Extensions.Primitives",
           "Identifier": {
             "PURL": "pkg:nuget/Microsoft.Extensions.Primitives@10.0.13",
-            "UID": "a7fc0a4c17ad0352"
+            "UID": "34732652acc6887"
           },
           "Version": "10.0.13",
           "Licenses": [
@@ -1042,8 +1082,8 @@
           "Relationship": "indirect",
           "Locations": [
             {
-              "StartLine": 353,
-              "EndLine": 357
+              "StartLine": 365,
+              "EndLine": 369
             }
           ],
           "AnalyzedBy": "nuget"
@@ -1053,7 +1093,7 @@
           "Name": "Microsoft.TestPlatform.ObjectModel",
           "Identifier": {
             "PURL": "pkg:nuget/Microsoft.TestPlatform.ObjectModel@17.14.1",
-            "UID": "bd91dd34bbf72146"
+            "UID": "15ea1e6623d908cd"
           },
           "Version": "17.14.1",
           "Licenses": [
@@ -1063,8 +1103,8 @@
           "Relationship": "indirect",
           "Locations": [
             {
-              "StartLine": 358,
-              "EndLine": 362
+              "StartLine": 370,
+              "EndLine": 374
             }
           ],
           "AnalyzedBy": "nuget"
@@ -1074,7 +1114,7 @@
           "Name": "Microsoft.TestPlatform.TestHost",
           "Identifier": {
             "PURL": "pkg:nuget/Microsoft.TestPlatform.TestHost@17.14.1",
-            "UID": "e79aa56f11e3bb79"
+            "UID": "bdd4e30934362ed6"
           },
           "Version": "17.14.1",
           "Licenses": [
@@ -1088,8 +1128,8 @@
           ],
           "Locations": [
             {
-              "StartLine": 363,
-              "EndLine": 371
+              "StartLine": 375,
+              "EndLine": 383
             }
           ],
           "AnalyzedBy": "nuget"
@@ -1099,7 +1139,7 @@
           "Name": "Microsoft.Win32.SystemEvents",
           "Identifier": {
             "PURL": "pkg:nuget/Microsoft.Win32.SystemEvents@6.0.0",
-            "UID": "5934383d0930a7a5"
+            "UID": "df4626875fd18ff"
           },
           "Version": "6.0.0",
           "Licenses": [
@@ -1109,8 +1149,8 @@
           "Relationship": "indirect",
           "Locations": [
             {
-              "StartLine": 372,
-              "EndLine": 376
+              "StartLine": 384,
+              "EndLine": 388
             }
           ],
           "AnalyzedBy": "nuget"
@@ -1120,7 +1160,7 @@
           "Name": "Newtonsoft.Json",
           "Identifier": {
             "PURL": "pkg:nuget/Newtonsoft.Json@13.0.3",
-            "UID": "871c3494e7acb14e"
+            "UID": "ce72ba6b4ad00b85"
           },
           "Version": "13.0.3",
           "Licenses": [
@@ -1130,8 +1170,8 @@
           "Relationship": "indirect",
           "Locations": [
             {
-              "StartLine": 377,
-              "EndLine": 381
+              "StartLine": 389,
+              "EndLine": 393
             }
           ],
           "AnalyzedBy": "nuget"
@@ -1141,7 +1181,7 @@
           "Name": "QRCoder",
           "Identifier": {
             "PURL": "pkg:nuget/QRCoder@1.8.1",
-            "UID": "a634b229e7ba8ebf"
+            "UID": "b8af482b6f3b436a"
           },
           "Version": "1.8.1",
           "Licenses": [
@@ -1154,8 +1194,8 @@
           ],
           "Locations": [
             {
-              "StartLine": 382,
-              "EndLine": 389
+              "StartLine": 394,
+              "EndLine": 401
             }
           ],
           "AnalyzedBy": "nuget"
@@ -1165,7 +1205,7 @@
           "Name": "System.Diagnostics.EventLog",
           "Identifier": {
             "PURL": "pkg:nuget/System.Diagnostics.EventLog@10.0.13",
-            "UID": "33b1d57c9d248bed"
+            "UID": "87ad8bdb09608c6a"
           },
           "Version": "10.0.13",
           "Licenses": [
@@ -1175,8 +1215,8 @@
           "Relationship": "indirect",
           "Locations": [
             {
-              "StartLine": 390,
-              "EndLine": 394
+              "StartLine": 402,
+              "EndLine": 406
             }
           ],
           "AnalyzedBy": "nuget"
@@ -1186,7 +1226,7 @@
           "Name": "System.Drawing.Common",
           "Identifier": {
             "PURL": "pkg:nuget/System.Drawing.Common@6.0.0",
-            "UID": "4832ae54bc1cdb58"
+            "UID": "a8b40f7bc4318a57"
           },
           "Version": "6.0.0",
           "Licenses": [
@@ -1199,8 +1239,8 @@
           ],
           "Locations": [
             {
-              "StartLine": 395,
-              "EndLine": 402
+              "StartLine": 407,
+              "EndLine": 414
             }
           ],
           "AnalyzedBy": "nuget"
@@ -1210,15 +1250,15 @@
           "Name": "xunit.abstractions",
           "Identifier": {
             "PURL": "pkg:nuget/xunit.abstractions@2.0.3",
-            "UID": "239633918970a135"
+            "UID": "b90ee88620c5f7c8"
           },
           "Version": "2.0.3",
           "Indirect": true,
           "Relationship": "indirect",
           "Locations": [
             {
-              "StartLine": 403,
-              "EndLine": 407
+              "StartLine": 415,
+              "EndLine": 419
             }
           ],
           "AnalyzedBy": "nuget"
@@ -1228,7 +1268,7 @@
           "Name": "xunit.analyzers",
           "Identifier": {
             "PURL": "pkg:nuget/xunit.analyzers@1.18.0",
-            "UID": "72d33f163e043ca3"
+            "UID": "686c0553e481cfdb"
           },
           "Version": "1.18.0",
           "Licenses": [
@@ -1238,8 +1278,8 @@
           "Relationship": "indirect",
           "Locations": [
             {
-              "StartLine": 408,
-              "EndLine": 412
+              "StartLine": 420,
+              "EndLine": 424
             }
           ],
           "AnalyzedBy": "nuget"
@@ -1249,7 +1289,7 @@
           "Name": "xunit.assert",
           "Identifier": {
             "PURL": "pkg:nuget/xunit.assert@2.9.3",
-            "UID": "95c75dbe5ff878b3"
+            "UID": "89bfd10a27ea8877"
           },
           "Version": "2.9.3",
           "Licenses": [
@@ -1259,8 +1299,8 @@
           "Relationship": "indirect",
           "Locations": [
             {
-              "StartLine": 413,
-              "EndLine": 417
+              "StartLine": 425,
+              "EndLine": 429
             }
           ],
           "AnalyzedBy": "nuget"
@@ -1270,7 +1310,7 @@
           "Name": "xunit.core",
           "Identifier": {
             "PURL": "pkg:nuget/xunit.core@2.9.3",
-            "UID": "e2a5873bbcd93868"
+            "UID": "77d4bec5fe9dda59"
           },
           "Version": "2.9.3",
           "Licenses": [
@@ -1284,8 +1324,8 @@
           ],
           "Locations": [
             {
-              "StartLine": 418,
-              "EndLine": 426
+              "StartLine": 430,
+              "EndLine": 438
             }
           ],
           "AnalyzedBy": "nuget"
@@ -1295,7 +1335,7 @@
           "Name": "xunit.extensibility.core",
           "Identifier": {
             "PURL": "pkg:nuget/xunit.extensibility.core@2.9.3",
-            "UID": "7b6e98c563fa31a3"
+            "UID": "1129cc924318e51e"
           },
           "Version": "2.9.3",
           "Licenses": [
@@ -1308,8 +1348,8 @@
           ],
           "Locations": [
             {
-              "StartLine": 427,
-              "EndLine": 434
+              "StartLine": 439,
+              "EndLine": 446
             }
           ],
           "AnalyzedBy": "nuget"
@@ -1319,7 +1359,7 @@
           "Name": "xunit.extensibility.execution",
           "Identifier": {
             "PURL": "pkg:nuget/xunit.extensibility.execution@2.9.3",
-            "UID": "35d6defc98262a8e"
+            "UID": "5d7e6d1f5d1fd07"
           },
           "Version": "2.9.3",
           "Licenses": [
@@ -1332,8 +1372,8 @@
           ],
           "Locations": [
             {
-              "StartLine": 435,
-              "EndLine": 442
+              "StartLine": 447,
+              "EndLine": 454
             }
           ],
           "AnalyzedBy": "nuget"
