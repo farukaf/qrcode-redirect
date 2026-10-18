@@ -81,7 +81,7 @@ jobs:
         run: |
           test -n "$SONAR_TOKEN" && test -n "$SONAR_ORGANIZATION" && test -n "$SONAR_PROJECT_KEY" || { echo 'Sonar enabled but required token/organization/project key missing'; exit 1; }
           dotnet tool restore
-          dotnet sonarscanner begin /k:"$SONAR_PROJECT_KEY" /o:"$SONAR_ORGANIZATION" /d:sonar.host.url=https://sonarcloud.io /d:sonar.token="$SONAR_TOKEN" /d:sonar.qualitygate.wait=true /d:sonar.cs.opencover.reportsPaths='**/coverage.opencover.xml' /d:sonar.exclusions='**/wwwroot/bootstrap/**'
+          dotnet sonarscanner begin /k:"$SONAR_PROJECT_KEY" /o:"$SONAR_ORGANIZATION" /d:sonar.host.url=https://sonarcloud.io /d:sonar.token="$SONAR_TOKEN" /d:sonar.qualitygate.wait=true /d:sonar.cs.opencover.reportsPaths='**/coverage.opencover.xml' /d:sonar.exclusions='**/node_modules/**,**/wwwroot/lib/**,**/wwwroot/vendor/**,**/wwwroot/bootstrap/**,**/wwwroot/jquery/**,**/*.min.js,**/*.min.css,**/*.map'
           dotnet restore src/qr-redirect.sln --locked-mode
           dotnet build src/qr-redirect.sln -c Release --no-restore --no-incremental
           dotnet test src/qr-redirect.sln -c Release --no-build --filter 'Category!=Browser' --collect:'XPlat Code Coverage' -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
