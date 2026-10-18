@@ -2,10 +2,32 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
 }
 
 main {
     flex: 1;
+}
+
+.site-footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem 1.25rem;
+    padding: 1rem;
+    border-top: 1px solid var(--line, #d6d5d5);
+    color: var(--muted, #555);
+    font-size: 0.9rem;
+}
+
+.site-footer nav {
+    display: flex;
+    gap: 1rem;
+}
+
+.site-footer a {
+    color: inherit;
 }
 
 .sidebar {
@@ -47,10 +69,6 @@ main {
 }
 
 @media (min-width: 641px) {
-    .page {
-        flex-direction: row;
-    }
-
     .sidebar {
         width: 250px;
         height: 100vh;
