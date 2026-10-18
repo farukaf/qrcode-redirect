@@ -45,7 +45,7 @@ public class BrowserTests
             Assert.Equal(ZXing.BarcodeFormat.QR_CODE, decoded.BarcodeFormat);
             var formUrl = decoded.Text;
             Assert.StartsWith(baseUrl + "/f/", formUrl);
-            Assert.Matches(@"/f/[A-Za-z0-9]{32}$", formUrl);
+            Assert.Matches(@"/f/[A-Za-z0-9]{5}$", formUrl);
             Assert.Equal(formUrl, driver.FindElement(By.CssSelector("a[href*='/f/']")).GetAttribute("href"));
             Assert.NotEqual(driver.SessionId, formDriver.SessionId);
             formDriver.Navigate().GoToUrl(formUrl);

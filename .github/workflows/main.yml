@@ -61,7 +61,7 @@ jobs:
           SONAR_ENABLED: ${{ vars.SONAR_ENABLED }}
         run: |
           if [ "$SONAR_ENABLED" != true ]; then
-            echo 'Sonar Cloud analysis is disabled. No Sonar quality gate has run; see docs/security/VALIDATION.md for activation.' >> "$GITHUB_STEP_SUMMARY"
+            echo 'Sonar Cloud analysis is disabled. No Sonar quality gate has run; configure SONAR_ENABLED, SONAR_ORGANIZATION, SONAR_PROJECT_KEY and SONAR_TOKEN to activate.' >> "$GITHUB_STEP_SUMMARY"
           fi
   sonar:
     if: vars.SONAR_ENABLED == 'true' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)

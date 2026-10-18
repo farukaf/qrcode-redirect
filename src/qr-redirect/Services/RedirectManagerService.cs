@@ -19,20 +19,19 @@ public class RedirectManagerService
     public bool Exist(string id) =>
         pages.ContainsKey(id);
 
-    public void Unregister(string id)
+    public void Unregister(RedirectPage page)
     {
-        pages.TryRemove(id, out _);
+        pages.TryRemove(new KeyValuePair<string, RedirectPage>(page.Id, page));
     }
 
-    public RedirectPage Register(string id)
+    public bool TryRegister(string id, out RedirectPage page)
     {
-        if (pages.TryGetValue(id, out var page))
-            return page;
-
-        page = new RedirectPage() { Id = id };
-        pages.TryAdd(id, page);
-        return page;
+        page = new RedirectPage { Id = id };
+        return pages.TryAdd(id, page);
     }
+
+    public RedirectPage Register(string id) =>
+        pages.GetOrAdd(id, key => new RedirectPage { Id = key });
 
     public async Task<string> Submit(string id, string link)
     {

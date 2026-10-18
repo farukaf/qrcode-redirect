@@ -13,10 +13,32 @@ public class ApplicationTests
         using var client = app.CreateClient(new() { BaseAddress = new Uri("https://localhost") });
         var home = await client.GetStringAsync("/");
         Assert.Contains("data:image/png;base64,", home);
+        Assert.Matches(@"/f/[A-Za-z0-9]{5}""", home);
         Assert.Contains("Link:", await client.GetStringAsync("/f/test"));
         var negotiate = await client.PostAsync("/_blazor/negotiate?negotiateVersion=1", null);
         Assert.Equal(HttpStatusCode.OK, negotiate.StatusCode);
         Assert.Contains("WebSockets", await negotiate.Content.ReadAsStringAsync());
+    }
+
+    [Fact]
+    public async Task CollidingCodeKeepsOriginalRegistrationAndCleanupRespectsOwnership()
+    {
+        var manager = new RedirectManagerService();
+        const string code = "Ab123";
+        Assert.True(manager.TryRegister(code, out var original));
+        Assert.False(manager.TryRegister(code, out _));
+        Assert.Same(original, manager.Register(code));
+        string? redirected = null;
+        original.Redirect = uri => { redirected = uri; return Task.CompletedTask; };
+        Assert.Equal(RedirectManagerService.SuccessMessage, await manager.Submit(code, "example.com"));
+        Assert.Equal("https://example.com/", redirected);
+
+        manager.Unregister(original);
+        Assert.False(manager.Exist(code));
+        Assert.True(manager.TryRegister(code, out var replacement));
+        manager.Unregister(original);
+        Assert.True(manager.Exist(code));
+        Assert.Same(replacement, manager.Register(code));
     }
 
     [Theory]

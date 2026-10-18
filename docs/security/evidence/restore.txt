@@ -1,3 +1,0 @@
-  Determining projects to restore...
-  Restored /home/agent/work/personal-apps-modernization/qrcode-redirect/tests/QrRedirect.Tests/QrRedirect.Tests.csproj (in 181 ms).
-  Restored /home/agent/work/personal-apps-modernization/qrcode-redirect/src/qr-redirect/qr-redirect.csproj (in 176 ms).

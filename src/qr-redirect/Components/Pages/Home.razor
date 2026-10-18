@@ -36,8 +36,8 @@
     {
         do
         {
-            id = stringGeneratorService.Generate(32);
-            if (!redirectManagerService.Exist(id))
+            id = stringGeneratorService.Generate(5);
+            if (redirectManagerService.TryRegister(id, out redirectPage))
                 return;
 
         } while (true);
@@ -56,8 +56,7 @@
 
     protected void RegisterPage()
     {
-        redirectPage = redirectManagerService.Register(id);
-        redirectPage.Redirect += RedirectPage_OnRedirect;
+        redirectPage!.Redirect += RedirectPage_OnRedirect;
     }
 
     protected Task RedirectPage_OnRedirect(string link)
@@ -68,7 +67,8 @@
 
     protected void UnregisterPage()
     {
-        redirectManagerService.Unregister(id);
+        if (redirectPage is not null)
+            redirectManagerService.Unregister(redirectPage);
     }
 
     protected void RemoveEvent()
