@@ -1,4 +1,4 @@
-﻿@page "/"
+@page "/"
 @using QRCoder
 @using QrRedirect.Services
 @rendermode InteractiveServer
@@ -10,6 +10,16 @@
 <PageTitle>Welcome</PageTitle>
 
 @code {
+    protected bool isInteractive;
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            isInteractive = true;
+            StateHasChanged();
+        }
+    }
+
     public string id = string.Empty;
     protected string qrCodeImage = string.Empty;
     protected RedirectPage? redirectPage;
@@ -27,7 +37,7 @@
         do
         {
             id = stringGeneratorService.Generate(5);
-            if (!redirectManagerService.Exist(id))
+            if (redirectManagerService.TryRegister(id, out redirectPage))
                 return;
 
         } while (true);
@@ -46,8 +56,7 @@
 
     protected void RegisterPage()
     {
-        redirectPage = redirectManagerService.Register(id);
-        redirectPage.Redirect += RedirectPage_OnRedirect;
+        redirectPage!.Redirect += RedirectPage_OnRedirect;
     }
 
     protected Task RedirectPage_OnRedirect(string link)
@@ -58,7 +67,8 @@
 
     protected void UnregisterPage()
     {
-        redirectManagerService.Unregister(id);
+        if (redirectPage is not null)
+            redirectManagerService.Unregister(redirectPage);
     }
 
     protected void RemoveEvent()
@@ -82,7 +92,8 @@
          src="@qrCodeImage"
          width="450"
          id="qr-code"
-         data-test-value="@formLink" />
+         data-test-value="@formLink"
+         data-interactive="@isInteractive.ToString().ToLowerInvariant()" />
     <h1 class="fs-2">Scan the QrCode to redirect this page.</h1>
     <p class="fs-4">Or access the link: <a class="fs-3" href="@formLink" target="_blank">@formLink</a></p>
 </div>
