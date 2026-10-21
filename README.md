@@ -1,5 +1,7 @@
 # QR Code Redirect
 
+**Didn't read? Use it now:** [qr.farukaf.com](https://qr.farukaf.com)
+
 Use a QR code to send a destination to a screen you cannot reach physically. QR Code Redirect shows a temporary QR code on a TV or shared display. Scan it with a phone, enter a destination website, and the browser displaying the QR code navigates there.
 
 ## Example: update a TV remotely
