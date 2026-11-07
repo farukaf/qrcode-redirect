@@ -1,0 +1,12 @@
+version: 2
+updates:
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: weekly
+  - package-ecosystem: nuget
+    directories:
+      - /src/qr-redirect
+      - /tests/QrRedirect.Tests
+    schedule:
+      interval: weekly
